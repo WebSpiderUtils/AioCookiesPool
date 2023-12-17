@@ -84,13 +84,11 @@ class Net:
                     js_content = parser.xpath("//script/text()")[0]
                     __jsl_clearance = self.ex_jsl(js_content).split('=')[-1]
                     conn.cookie_jar.update_cookies({"__jsl_clearance_s": __jsl_clearance}, response_url=resp.url)
-                    continue
                 else:
                     raise UnknownStatus(status)
             except Exception as e:
                 logger.exception(e)
                 proxy = await self.proxy_client.proxies()
-                continue
 
     async def get(
             self,
@@ -100,7 +98,7 @@ class Net:
             data: dict = None,
             proxy: str = '',
             allow_status: list = None
-    ):
+    ) -> Tuple[ClientResponse, str]:
         return await self.request('get', conn, url, headers, data, proxy, allow_status)
 
     async def post(
@@ -111,7 +109,7 @@ class Net:
             data: dict = None,
             proxy: str = '',
             allow_status: list = None
-    ):
+    ) -> Tuple[ClientResponse, str]:
         return await self.request('post', conn, url, headers, data, proxy, allow_status)
 
 

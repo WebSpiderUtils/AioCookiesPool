@@ -12,6 +12,10 @@ class Proxy:
 
     @retry(wait=wait_fixed(5))
     async def proxies(self) -> str:
+        """
+        获取适合aiohttp的代理
+        :return:
+        """
         async with aiohttp.ClientSession() as session:
             async with session.get(self.api) as response:
                 text = await response.text()
