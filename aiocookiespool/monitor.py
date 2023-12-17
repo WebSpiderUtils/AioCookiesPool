@@ -1,4 +1,3 @@
-import json
 import time
 import asyncio
 from asyncio import gather
