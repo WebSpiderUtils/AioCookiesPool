@@ -1,6 +1,7 @@
 # AioCookiesPool
 
 [![Static Badge](https://img.shields.io/badge/Telegram-%40heeetui-blue?logo=telegram)](https://t.me/heeetui)
+![Static Badge](https://img.shields.io/badge/Email-huaiyukeji%40gmail.com-green?logo=gmail)
 
 
 基于python asyncio的web网站cookie管理项目；目前提供周期性的登陆获取指定网站Cookie，检测Cookie是否有效，
@@ -53,9 +54,11 @@ python main.py --processor generator
 ```
 
 # 公示系统demo
+有合作需求可联系。
 
 ## 基础配置
 1、账号自备，加密后通过接口放入redis等待使用
+
 2、将代理接口地址和极验打码接口配置好；注意aiohttp代理格式；极验接口返回格式代码中有写。
 ```python
 import os
