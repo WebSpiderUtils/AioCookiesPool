@@ -22,8 +22,7 @@ demo编写：
 - [x] gsxt.gov.cn 企业信息公示系统cookie管理
 - [ ] 欢迎pr
 
-更多问题，欢迎进入群聊讨论：[TG群聊](https://t.me/+If_iQcOzumthOGI1)
-
+更多问题欢迎讨论与合作：telegram @heeetui
 
 # 安装和运行
 安装
