@@ -1,5 +1,8 @@
 # AioCookiesPool
 
+[![Static Badge](https://img.shields.io/badge/Telegram-%40heeetui-blue?logo=telegram)](https://t.me/heeetui)
+
+
 基于python asyncio的web网站cookie管理项目；目前提供周期性的登陆获取指定网站Cookie，检测Cookie是否有效，
 异常账号睡眠，通过API获取Cookie以及查看Cookie使用情况等功能。
 
@@ -22,7 +25,6 @@ demo编写：
 - [x] gsxt.gov.cn 企业信息公示系统cookie管理
 - [ ] 欢迎pr
 
-更多问题欢迎讨论与合作：telegram @heeetui
 
 # 安装和运行
 安装
