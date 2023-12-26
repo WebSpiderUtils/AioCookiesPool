@@ -39,6 +39,7 @@ MONITOR_CYCLE = 600
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
     # 'weibo': 'WeiboCookiesGenerator',
+    'gsxt': 'GsxtCookiesGenerator',
 }
 # 测试类，如扩展其他站点，请在此配置
 TESTER_MAP = {
@@ -47,7 +48,7 @@ TESTER_MAP = {
 }
 # 黑名单检测类
 MONITOR_MAP = {
-    # 'gsxt': 'GsxtBlocklistMonitor'
+    'gsxt': 'GsxtMonitor'
 }
 # 为每个测试器配置测试URL
 TEST_URL_MAP = {

@@ -53,7 +53,7 @@ class Net:
             result = case_1()
         if 'location.href=location.pathname' in js:
             result = case_2()
-        logger.debug(result)
+        # logger.debug(result)
         return result
 
     async def request(
@@ -65,7 +65,7 @@ class Net:
             data: dict = None,
             proxy: str = '',
             allow_status: list = None
-    ) -> Tuple[ClientResponse, str]:
+    ) -> Tuple[str, str]:
         if allow_status is None:
             allow_status = [200]
         method = method.lower()
@@ -76,9 +76,9 @@ class Net:
                 resp = await eval(f"conn.{method}")(url, headers=headers, proxy=proxy, data=data, allow_redirects=False)
                 html = await resp.text()
                 status = resp.status
-                logger.debug(status)
+                # logger.debug(status)
                 if status in allow_status:
-                    return resp, proxy
+                    return html, proxy
                 elif status == 521:
                     parser = etree.HTML(html)
                     js_content = parser.xpath("//script/text()")[0]
@@ -87,7 +87,7 @@ class Net:
                 else:
                     raise UnknownStatus(status)
             except Exception as e:
-                logger.exception(e)
+                logger.error(e)
                 proxy = await self.proxy_client.proxies()
 
     async def get(
@@ -98,7 +98,7 @@ class Net:
             data: dict = None,
             proxy: str = '',
             allow_status: list = None
-    ) -> Tuple[ClientResponse, str]:
+    ) -> Tuple[str, str]:
         return await self.request('get', conn, url, headers, data, proxy, allow_status)
 
     async def post(
@@ -109,7 +109,7 @@ class Net:
             data: dict = None,
             proxy: str = '',
             allow_status: list = None
-    ) -> Tuple[ClientResponse, str]:
+    ) -> Tuple[str, str]:
         return await self.request('post', conn, url, headers, data, proxy, allow_status)
 
 

@@ -1,5 +1,4 @@
 import asyncio
-
 import aiohttp
 from aiocookiespool.log import logger
 from login.gsxt.config import PROXY_API
@@ -14,7 +13,7 @@ class Proxy:
     async def proxies(self) -> str:
         """
         获取适合aiohttp的代理
-        :return:
+        :return: 'https://***.***.***.***:***'
         """
         async with aiohttp.ClientSession() as session:
             async with session.get(self.api) as response:

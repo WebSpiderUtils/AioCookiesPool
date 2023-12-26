@@ -1,5 +1,4 @@
 import asyncio
-
 import aiohttp
 from aiocookiespool.log import logger
 from login.gsxt.config import GEETEST_API

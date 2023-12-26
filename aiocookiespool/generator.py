@@ -1,9 +1,11 @@
 import json
+import time
 import asyncio
 from typing import NoReturn
 from asyncio import Semaphore, gather
 from aiocookiespool.log import logger
 from aiocookiespool.db import RedisClient
+from login.gsxt.cookies import GsxtCookies
 from aiocookiespool.config import GENERATOR_CONCURRENCE
 
 
@@ -27,7 +29,7 @@ class CookiesGenerator(object):
         新生成Cookies，子类需要重写
         :param username: 用户名
         :param password: 密码
-        :return:
+        :return: {'status': 1, 'content': {}}
         """
         raise NotImplementedError
 
@@ -84,6 +86,32 @@ class CookiesGenerator(object):
         :return:
         """
         pass
+
+
+class GsxtCookiesGenerator(CookiesGenerator):
+    def __init__(self, website='gsxt'):
+        CookiesGenerator.__init__(self, website)
+        self.website = website
+
+    async def new_cookies(self, username, password):
+        return await GsxtCookies(username, password).login()
+
+    async def get_cookies_failed(self, username: str) -> NoReturn:
+        """
+        账号获取cookie失败，放入黑名单中休眠total_time
+        :param username:
+        :return:
+        """
+        logger.info('Cookie获取失败')
+        await self.blocklist_db.set(
+            username=username,
+            value=json.dumps({
+                "timestamp": int(time.time()),
+                "total_time": 18000,
+                "reason": "Cookie获取失败"
+            }, ensure_ascii=False)
+        )
+        logger.info(f'账号放入黑名单：{username}')
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@
 
 demo编写：
 - [ ] weibo.com 微博cookie管理
-- [ ] gsxt.gov.cn 企业信息公示系统cookie管理
+- [x] gsxt.gov.cn 企业信息公示系统cookie管理
 - [ ] 欢迎pr
 
 更多问题，欢迎进入群聊讨论：[TG群聊](https://t.me/+If_iQcOzumthOGI1)
@@ -51,3 +51,30 @@ python main.py --processor generator
 2023-12-13 15:27:46.031 | INFO     | aiocookiespool.scheduler:generator:23 - Cookies生成进程开始运行
 ```
 
+# 公示系统demo
+
+## 基础配置
+1、账号自备，加密后通过接口放入redis等待使用
+2、将代理接口地址和极验打码接口配置好；注意aiohttp代理格式；极验接口返回格式代码中有写。
+```python
+import os
+
+PROXY_API = os.environ.get('PROXY_POOL_API')
+GEETEST_API = os.environ.get('GEETEST_API')
+```
+## 部分测试日志
+```shell
+2023-12-26 15:05:14.447 | INFO     | aiocookiespool.scheduler:api:50 - API接口开始运行
+DEBUG:asyncio:Using selector: KqueueSelector
+======== Running on http://0.0.0.0:5200 ========
+(Press CTRL+C to quit)
+2023-12-26 15:05:14.706 | INFO     | aiocookiespool.scheduler:generator:23 - Cookies生成进程开始运行
+2023-12-26 15:05:14.706 | INFO     | aiocookiespool.scheduler:tester:32 - Cookies检测进程开始运行
+2023-12-26 15:05:14.706 | INFO     | aiocookiespool.scheduler:monitor:41 - 黑名单检测程序开始运行
+2023-12-26 15:05:14.714 | INFO     | aiocookiespool.monitor:task:19 - 正在检查账号: fWo3Tc9
+2023-12-26 15:05:14.715 | INFO     | aiocookiespool.monitor:task:29 - 仍需睡眠: fWo3Tc9 剩余时间: 16880 秒
+2023-12-26 15:05:14.715 | INFO     | aiocookiespool.monitor:task:19 - 正在检查账号: Ah3JWkF
+2023-12-26 15:05:14.715 | INFO     | aiocookiespool.monitor:task:29 - 仍需睡眠: Ah3JWkF 剩余时间: 16433 秒
+2023-12-26 15:05:14.717 | SUCCESS  | aiocookiespool.monitor:run:38 - 黑名单检查结束
+2023-12-26 15:05:14.723 | SUCCESS  | aiocookiespool.generator:run:78 - gsxt 所有账号都已经成功获取Cookies
+```
